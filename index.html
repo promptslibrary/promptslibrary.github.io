@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Prompts Collection</title>
+  <meta name="description" content="Comprehensive collection of Python programming prompts and automation tasks">
+  <meta name="keywords" content="python, programming, automation, prompts, tasks, development">
+  <meta name="author" content="Python Prompts Collection">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐍</text></svg>">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="prompts.json" as="fetch" type="application/json" crossorigin>
+  
+  <!-- Open Graph tags for social media -->
+  <meta property="og:title" content="Python Prompts Collection">
+  <meta property="og:description" content="Comprehensive collection of Python programming prompts and automation tasks">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐍</text></svg>">
+  
+  <!-- Twitter Card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Python Prompts Collection">
+  <meta name="twitter:description" content="Comprehensive collection of Python programming prompts and automation tasks">
+</head>
+<body>
+  <!-- Skip to content link for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <!-- Header Section -->
+  <header class="header" role="banner">
+    <div class="header-content">
+      <h1 class="main-title">
+        <span class="title-icon" aria-hidden="true">🐍</span>
+        <span class="title-text">Python Prompts Collection</span>
+      </h1>
+      <div class="header-controls">
+        <div class="search-container">
+          <label for="searchInput" class="visually-hidden">Search prompts</label>
+          <input 
+            type="text" 
+            id="searchInput" 
+            class="search-input" 
+            placeholder="🔍 Search prompts, keywords, or descriptions..."
+            autocomplete="off"
+            spellcheck="false"
+            aria-describedby="search-help">
+          <div id="search-help" class="visually-hidden">
+            Type to search through all prompts and descriptions
+          </div>
+        </div>
+        <button 
+          id="downloadJson" 
+          class="download-btn"
+          aria-label="Download JSON file containing all prompts">
+          <span aria-hidden="true">📥</span>
+          <span class="btn-text">Download JSON</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="main-container" id="main-content">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" role="complementary" aria-label="Categories and tasks navigation">
+      <div class="sidebar-header">
+        <h2>
+          <span aria-hidden="true">📂</span>
+          Categories & Tasks
+        </h2>
+        <div class="task-counter" id="taskCounter" aria-live="polite">
+          Loading...
+        </div>
+      </div>
+      <nav class="sidebar-content" id="sidebarContent" aria-label="Task categories">
+        <div class="loading" role="status" aria-live="polite">
+          <div class="loading-spinner" aria-hidden="true"></div>
+          <span>Loading prompts...</span>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Task Details Section -->
+    <section class="task-details" role="main" aria-label="Task details">
+      <header class="task-header">
+        <h1 class="task-title" id="taskTitle">Select a Task</h1>
+        <p class="task-description" id="taskDescription">
+          Choose a prompt from the sidebar to see details
+        </p>
+      </header>
+      
+      <div class="task-content" id="taskContent">
+        <div class="empty-state">
+          <div class="empty-icon" aria-hidden="true">🎯</div>
+          <h2>Ready to Explore?</h2>
+          <p>
+            Select any task from the sidebar to view detailed steps and implementation guidance.
+            Use the search box to quickly find specific prompts.
+          </p>
+          <div class="keyboard-shortcuts">
+            <h3>Keyboard Shortcuts:</h3>
+            <ul>
+              <li><kbd>Ctrl</kbd> + <kbd>F</kbd> - Focus search</li>
+              <li><kbd>Ctrl</kbd> + <kbd>C</kbd> - Copy current prompt</li>
+              <li><kbd>Ctrl</kbd> + <kbd>D</kbd> - Download current task</li>
+              <li><kbd>Esc</kbd> - Clear search</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-content">
+      <p>&copy; 2024 Python Prompts Collection. Made with ❤️ for developers.</p>
+      <div class="footer-links">
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="#" onclick="window.print()">Print</a>
+        <button id="toggleTheme" class="theme-toggle" aria-label="Toggle dark mode">
+          <span id="themeIcon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Notification Container -->
+  <div id="notificationContainer" class="notification-container" aria-live="polite"></div>
+
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay" class="loading-overlay" role="status" aria-live="polite">
+    <div class="loading-content">
+      <div class="loading-spinner large" aria-hidden="true"></div>
+      <p>Loading Python Prompts...</p>
+    </div>
+  </div>
+
+  <!-- Error Modal -->
+  <div id="errorModal" class="modal hidden" role="dialog" aria-labelledby="errorTitle" aria-describedby="errorMessage">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h2 id="errorTitle">Error</h2>
+        <button class="modal-close" aria-label="Close error dialog">&times;</button>
+      </header>
+      <div class="modal-body">
+        <p id="errorMessage"></p>
+      </div>
+      <footer class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeErrorModal()">Close</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+  
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(registration => console.log('SW registered'))
+          .catch(error => console.log('SW registration failed'));
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+{
+  "File Operations": {
+    "1.1 Text File Inspector & Reporter": {
+      "description": "Python script using os and chardet",
+      "steps": [
+        "Read all .txt files from a specified directory.",
+        "Automatically detect each file's encoding using chardet, defaulting to UTF-8 if detection fails or is uncertain.",
+        "Print the first five lines of each file to the console.",
+        "Skip empty files and log any unreadable files to an errors.log file.",
+        "Generate a summary report in JSON format file_inspection_report.json containing for each file: filename, encoding_used, file_size_bytes, and lines_read.",
+        "Provide a final console summary showing the total number of files processed and skipped."
+      ]
+    },
+    "1.2 Multi-Keyword File Searcher": {
+      "description": "Python tool using argparse and csv",
+      "steps": [
+        "Accept multiple keywords from the user via command-line arguments.",
+        "Search through all text files in a directory and its subdirectories for these keywords.",
+        "For each match, record the filename, line_number, and a context snippet the matching line ±2 lines in search_results.csv.",
+        "Skip files larger than50 MB to maintain performance.",
+        "Handle files that cannot be opened permission errors, corruption by logging them to a separate file.",
+        "Generate a final summary showing the total number of matches found per keyword."
+      ]
+    },
+    "1.3 CSV Merger & Deduplicator": {
+      "description": "Python script using pandas",
+      "steps": [
+        "Read all CSV files from a specified directory.",
+        "Merge them into a single combined.csv file, aligning columns by name and filling missing values with NULL.",
+        "Remove duplicate rows based on all columns.",
+        "Log the number of rows discarded from each source file to a merge_log.json.",
+        "Handle encoding issues and inconsistent delimiters gracefully.",
+        "Generate a statistical summary showing: total_rows_combined, unique_rows_final, total_columns_final."
+      ]
+    },
+    "1.4 Directory Monitor & Processor": {
+      "description": "Python program using watchdog",
+      "steps": [
+        "Monitor a specified directory for new files .csv, .txt.",
+        "For new .csv files, append their content to a master .csv file.",
+        "For new .txt files, scan them for a set of predefined keywords and log matches to keyword_matches.log.",
+        "Run continuously, checking for changes every30 seconds.",
+        "Maintain a JSON log processing_log.json with metadata, timestamp, filename, and action taken for each processed file.",
+        "Provide a summary upon keyboard interrupt showing: files_processed, broken down by type."
+      ]
+    },
+    "1.5 Directory Backup Monitor": {
+      "description": "Python tool using watchdog and shutil",
+      "steps": [
+        "Monitor a directory for new or modified files.",
+        "Create a timestamped backup of each changed file in a backups/ directory.",
+        "Maintain a JSON index backup_index.json mapping original files to their backup paths.",
+        "Enforce a configurable maximum number of backups per file, deleting the oldest when exceeded.",
+        "Generate a summary showing: files_backed_up, total_backup_size_gb, backup_date_range."
+      ]
+    },
+    "1.6 Bulk File Renamer": {
+      "description": "Python script using os and argparse",
+      "steps": [
+        "Rename files in a directory based on a user-defined pattern, prefix_<timestamp>_<sequence>.<ext>.",
+        "Ensure no filename conflicts occur.",
+        "Provide a dry-run option to preview changes without renaming.",
+        "Generate a summary report listing: files_renamed, files_skipped, rename_conflicts_avoided."
+      ]
+    },
+    "1.7 Secure ZIP Archiver": {
+      "description": "Python utility using zipfile and json",
+      "steps": [
+        "Compress a set of files/directories into a password-protected ZIP archive.",
+        "Allow splitting large archives into parts.",
+        "Maintain a JSON log compression_log.json of original and compressed sizes.",
+        "Generate a summary showing: files_compressed, archive_size, compression_ratio_percentage."
+      ]
+    },
+    "1.8 Duplicate File Finder & Remover": {
+      "description": "Python tool using hashlib and os",
+      "steps": [
+        "Identify duplicate files in a directory by comparing SHA-256 hashes.",
+        "Generate a report duplicates_report.json listing all duplicate groups.",
+        "Provide options to automatically delete duplicates or move them to a duplicates/ folder.",
+        "Log all actions taken.",
+        "Generate a summary showing: duplicates_found, disk_space_saved, unique_files_remaining."
+      ]
+    },
+    "1.9 Directory Snapshot & Comparator": {
+      "description": "Python program using json and os",
+      "steps": [
+        "Create a timestamped JSON snapshot of a directory's structure and file metadata.",
+        "Allow comparison of two snapshots to identify added, deleted, and modified files.",
+        "Generate a comparison report snapshot_comparison.json detailing the changes.",
+        "Provide a summary showing: files_added, files_deleted, files_modified."
+      ]
+    }
+  },
+  "PDF Tools": {
+    "1.10 PDF Keyword Search & Reporter": {
+      "description": "Python utility using pypdf2 or pdfplumber",
+      "steps": [
+        "Searches for a user-provided keyword across all pages of all PDFs in a directory.",
+        "For each match, records the filename, page_number, and a text snippet surrounding the keyword.",
+        "Saves all results to pdf_matches.json.",
+        "Handles encrypted PDFs by skipping them and logging a warning.",
+        "Generates a summary showing: files_scanned, pages_processed, total_matches_found."
+      ]
+    },
+    "1.11 Batch PDF Encryption Tool": {
+      "description": "Python tool using pikepdf",
+      "steps": [
+        "Encrypts PDFs with a user-provided password.",
+        "Validates that the input PDF is not already encrypted.",
+        "Supports batch processing of multiple files.",
+        "Generates a log entry per file in encryption_log.json with filename, status, encryption_algorithm.",
+        "Provides a final summary report: encrypted_successfully, skipped already encrypted, failed."
+      ]
+    },
+    "1.12 Automated Report Generation": {
+      "description": "Python script using reportlab",
+      "steps": [
+        "Generates a multi-page PDF report with a title page, table of contents, sample chapters, and page numbers.",
+        "Allows customization of font, font_size, and chapter_style via a configuration dictionary.",
+        "Saves the report to report.pdf.",
+        "Logs the details of each generated section to report_generation.log.",
+        "Generates a summary showing: total_pages, chapters_created."
+      ]
+    },
+    "1.13 Table Extractor to CSV": {
+      "description": "Python automation tool using camelot or tabula-py",
+      "steps": [
+        "Extracts tables from every page of PDF documents in a directory.",
+        "Exports each detected table to a separate CSV file in an output folder.",
+        "Handles pages with no tables by logging a warning.",
+        "Generates a summary report table_extraction_report.json listing: tables_extracted_per_pdf, total_rows_extracted."
+      ]
+    },
+    "1.14 OCR Text Extractor from Scanned PDFs": {
+      "description": "Python script using pytesseract and pdf2image",
+      "steps": [
+        "Performs OCR on scanned PDFs to extract text.",
+        "Saves the extracted text to a .txt file for each PDF.",
+        "Logs pages with low OCR confidence <80% for manual review.",
+        "Generates a summary showing: pages_scanned, words_extracted, low_confidence_pages."
+      ]
+    }
+  },
+  "Watermarking & Image Tools": {
+    "1.15 Text Watermark Applicator": {
+      "description": "Python utility using pypdf2 and reportlab",
+      "steps": [
+        "Adds a diagonal text watermark, \"CONFIDENTIAL - \" to every page of a PDF.",
+        "Provides options to control watermark opacity, font_size, and color via command-line arguments.",
+        "Processes multiple PDFs in batch, saving watermarked versions with _watermarked suffix.",
+        "Generates a summary report listing: files_processed, processing_time, failures, encrypted PDFs."
+      ]
+    },
+    "1.16 Image Watermark Applicator": {
+      "description": "Python script using pypdf2 and PIL",
+      "steps": [
+        "Applies an image watermark PNG to the center of every page of a PDF.",
+        "Allows the user to adjust the opacity and scaling of the watermark image.",
+        "Processes multiple PDFs, saving output to a specified folder with _watermarked filenames.",
+        "Handles missing watermark images and incompatible PDFs gracefully.",
+        "Generates a summary showing: pdfs_processed, total_output_size_mb."
+      ]
+    }
+  },
+  "Text Analysis & Automation": {
+    "1.17 Console Pattern Generator": {
+      "description": "Python script using argparse",
+      "steps": [
+        "Generates text patterns, horizontal/vertical lines, squares, and pyramids from a user-provided character.",
+        "Validates that the input is a single character.",
+        "Allows the user to specify the pattern size width/height.",
+        "Provides an output option to save the pattern to a text file.",
+        "Displays the pattern in the console.",
+        "Generates a summary log showing: pattern_type, size, output_file if used."
+      ]
+    },
+    "1.18 Config-Driven Pattern Generator": {
+      "description": "Python program using json and argparse",
+      "steps": [
+        "Loads pattern generation configuration character, style, size, uppercase, and reverse from a JSON file.",
+        "Allows overriding any config option via command-line arguments.",
+        "Generates the specified pattern and exports it to a text file.",
+        "Logs the final configuration used to a separate JSON file, config_used.json, for reproducibility.",
+        "Generates a summary report showing which configuration options were applied."
+      ]
+    },
+    "1.19 Data: Multi-Format Financial Report Generator": {
+      "description": "Python script using Jinja2 and pandas",
+      "steps": [
+        "Formats numerical financial data, revenue, profit, and margins into multiple output formats: JSON, CSV, and plain text.",
+        "Uses a template system for consistent structuring of fields and currency symbols.",
+        "Allows users to select the output format via a command-line option format.",
+        "Calculates and includes summary statistics: total revenue, total profit, average margin.",
+        "Saves all output files with a unique timestamp in the filename.",
+        "Prints a summary of the generated reports and their locations."
+      ]
+    },
+    "1.20 Log File Filter & Consolidator": {
+      "description": "Python program using datetime and re",
+      "steps": [
+        "Reads multiple log files and filters entries based on a user-provided date and severity level: INFO, WARNING, and ERROR.",
+        "Writes the filtered entries to a consolidated filtered.log file.",
+        "Handles various date formats and missing fields.",
+        "Logs processing metrics to log_processing_summary.json: lines_processed, lines_retained, lines_skipped per file.",
+        "Prints a final summary of totals across all files."
+      ]
+    },
+    "1.21 Word Frequency Analyzer": {
+      "description": "Python script using nltk and collections",
+      "steps": [
+        "Analyzes a directory of text files, calculating word frequency.",
+        "Normalizes words lowercase, removes stopwords and counts occurrences.",
+        "Saves the top50 words per file to per_file_frequency.json.",
+        "Generates a consolidated chart, top_words.png, of the most common words across all files.",
+        "Handles large files efficiently.",
+        "Generates a final summary showing: total_words_processed, unique_words, top_5_common_words."
+      ]
+    }
+  }
+}
