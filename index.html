@@ -1662,7 +1662,7 @@ generated, and stock updates applied. News, Media &amp; Social</p>
         // Load prompts from JSON file
         async function loadPrompts() {
             try {
-                const response = await fetch('python-prompts3.json');
+                const response = await fetch('prompts-list.json');
                 if (!response.ok) throw new Error('Failed to fetch prompts');
                 
                 allPrompts = await response.json();
