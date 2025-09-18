@@ -1651,7 +1651,6 @@ generated, and stock updates applied. News, Media &amp; Social</p>
                 setupEventListeners();
                 renderCategories();
                 renderPrompts();
-                updateStats();
                 setupScrollAnimations();
             } catch (error) {
                 console.error('Failed to initialize app:', error);
@@ -2025,13 +2024,6 @@ generated, and stock updates applied. News, Media &amp; Social</p>
             document.querySelectorAll('.fade-in').forEach(element => {
                 observer.observe(element);
             });
-        }
-
-        // Update statistics
-        function updateStats() {
-            document.getElementById('totalPrompts').textContent = `${allPrompts.length}+`;
-            document.getElementById('totalCategories').textContent = categories.size;
-            document.getElementById('totalSubcategories').textContent = `${subcategories.size}+`;
         }
 
         // Escape HTML to prevent XSS
